@@ -3,15 +3,18 @@ module sso
 go 1.26
 
 require (
+	github.com/golang-jwt/jwt/v5 v5.3.1
+	github.com/golang-migrate/migrate/v4 v4.19.1
 	github.com/ilyakaznacheev/cleanenv v1.5.0
 	github.com/serglutsk/gRPC-sso v0.0.2
+	golang.org/x/crypto v0.49.0
 	google.golang.org/grpc v1.79.2
 )
 
 require (
 	github.com/BurntSushi/toml v1.2.1 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
-	golang.org/x/crypto v0.49.0 // indirect
+	github.com/mattn/go-sqlite3 v1.14.22 // indirect
 	golang.org/x/net v0.51.0 // indirect
 	golang.org/x/sys v0.42.0 // indirect
 	golang.org/x/text v0.35.0 // indirect
