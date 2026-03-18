@@ -82,6 +82,7 @@ func TestRegisterLogin_DuplicatedRegistration(t *testing.T) {
 	assert.Nil(t, respReg2)
 	assert.ErrorContains(t, err, "user already exists")	
 }
+
 func TestRegister_FailCases(t *testing.T) {
 	ctx, st := suite.New(t)
 
@@ -122,6 +123,7 @@ func TestRegister_FailCases(t *testing.T) {
 		})
 	}
 }
+
 func TestLogin_FailCases(t *testing.T) {
 	ctx, st := suite.New(t)
 
