@@ -75,6 +75,7 @@ func (a *Auth) Login(
 	if err != nil {
 		if errors.Is(err, storage.ErrUserNotFound) {
 			a.log.Warn("user not found", sl.Err(err))
+			return "", ErrInvalidCredentials
 		}
 		log.Error("failed to get user", sl.Err(err))
 		return "", fmt.Errorf("%s: %w", op, err)

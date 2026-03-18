@@ -12,7 +12,7 @@ type Config struct {
 	Env         string        `yaml:"env" env-default:"local"`
 	GRPC        GRPCConfig    `yaml:"grpc"`
 	StoragePath string        `yaml:"storage_path" env-required:"true"`
-	TokenTtl    time.Duration `yaml:"token_ttl" env-required:"true"`
+	TokenTTL    time.Duration `yaml:"token_ttl" env-required:"true"`
 }
 
 type GRPCConfig struct {
@@ -21,17 +21,26 @@ type GRPCConfig struct {
 }
 
 func MustLoad() *Config {
-	path := fetchConfigPath()
-	if path == "" {
+	configPath := fetchConfigPath()
+	if configPath == "" {
 		panic("config path is empty")
 	}
-	if _, err := os.Stat(path); os.IsNotExist(err) {
-		panic("config file doesn't exist: " + path)
+
+	return MustLoadPath(configPath)
+}
+
+func MustLoadPath(configPath string) *Config {
+	// check if file exists
+	if _, err := os.Stat(configPath); os.IsNotExist(err) {
+		panic("config file does not exist: " + configPath)
 	}
+
 	var cfg Config
-	if err := cleanenv.ReadConfig(path, &cfg); err != nil {
-		panic("Failed to read config: " + err.Error())
+
+	if err := cleanenv.ReadConfig(configPath, &cfg); err != nil {
+		panic("cannot read config: " + err.Error())
 	}
+
 	return &cfg
 }
 
